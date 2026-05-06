@@ -18,4 +18,4 @@ Same flow, but lists *every* process on the system (background daemons included)
 
 ## Permissions
 
-Force Quit uses Raycast's existing automation permission to query running applications via AppleScript. No additional setup is required.
+Force Quit only reads the public macOS process list (`lsappinfo`, `ps`) — no Automation permission, Accessibility permission, or full‑disk access is required.

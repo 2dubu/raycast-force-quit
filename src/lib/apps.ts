@@ -5,32 +5,28 @@ import type { RunningApp } from "../types";
 
 const execFileAsync = promisify(execFile);
 
-const APPLESCRIPT = `
-tell application "System Events"
-  set output to ""
-  repeat with p in (every application process whose background only is false)
-    try
-      set output to output & (name of p) & "|" & (unix id of p) & "|" & (POSIX path of (file of p)) & linefeed
-    end try
-  end repeat
-  return output
-end tell
-`;
-
 type RawApp = { name: string; pid: number; bundlePath: string };
 
 async function listGuiApps(): Promise<RawApp[]> {
-  const { stdout } = await execFileAsync("osascript", ["-e", APPLESCRIPT], { maxBuffer: 1024 * 1024 });
+  const { stdout } = await execFileAsync("/usr/bin/lsappinfo", ["list"], {
+    maxBuffer: 5 * 1024 * 1024,
+  });
   const apps: RawApp[] = [];
-  for (const line of stdout.split("\n")) {
-    const trimmed = line.trim();
-    if (!trimmed) continue;
-    const parts = trimmed.split("|");
-    if (parts.length < 3) continue;
-    const [name, pidStr, bundlePath] = parts;
-    const pid = Number.parseInt(pidStr, 10);
+  // Each entry begins with " N) " at the start of a line.
+  const entries = stdout.split(/\n(?=\s*\d+\)\s)/);
+  for (const entry of entries) {
+    const nameMatch = entry.match(/^\s*\d+\)\s+"([^"]+)"/);
+    if (!nameMatch) continue;
+    // Replicate macOS' Force Quit window: only foreground apps (visible in Dock / Cmd+Tab).
+    const typeMatch = entry.match(/type="([^"]+)"/);
+    if (!typeMatch || typeMatch[1] !== "Foreground") continue;
+    const pidMatch = entry.match(/pid\s*=\s*(\d+)/);
+    if (!pidMatch) continue;
+    const pid = Number.parseInt(pidMatch[1], 10);
     if (!Number.isFinite(pid)) continue;
-    apps.push({ name, pid, bundlePath });
+    const bundleMatch = entry.match(/bundle path="([^"]+)"/);
+    const bundlePath = bundleMatch ? bundleMatch[1] : "";
+    apps.push({ name: nameMatch[1], pid, bundlePath });
   }
   return apps;
 }
