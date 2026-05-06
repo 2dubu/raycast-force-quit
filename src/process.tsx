@@ -1,4 +1,4 @@
-import { Action, ActionPanel, Color, Icon, List } from "@raycast/api";
+import { Action, ActionPanel, Icon, List } from "@raycast/api";
 import { useCachedPromise } from "@raycast/utils";
 import { fetchAllProcesses } from "./lib/processes";
 import { killByPid } from "./lib/kill";
@@ -15,10 +15,7 @@ export default function Command() {
           key={proc.pid}
           icon={proc.bundlePath ? { fileIcon: proc.bundlePath } : Icon.Terminal}
           title={proc.name}
-          accessories={[
-            { text: { value: `PID ${proc.pid}`, color: Color.SecondaryText } },
-            { tag: formatMemoryMB(proc.memoryMB) },
-          ]}
+          accessories={[{ tag: formatMemoryMB(proc.memoryMB) }]}
           actions={
             <ActionPanel>
               <Action
