@@ -9,4 +9,5 @@ export type RunningProcess = {
   name: string;
   pid: number;
   memoryMB: number;
+  bundlePath?: string;
 };

@@ -13,7 +13,7 @@ export default function Command() {
       {data.map((proc) => (
         <List.Item
           key={proc.pid}
-          icon={Icon.Terminal}
+          icon={proc.bundlePath ? { fileIcon: proc.bundlePath } : Icon.Terminal}
           title={proc.name}
           subtitle={`PID ${proc.pid}`}
           accessories={[{ text: formatMemoryMB(proc.memoryMB) }]}
