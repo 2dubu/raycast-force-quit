@@ -15,8 +15,7 @@ export default function Command() {
           key={proc.pid}
           icon={proc.bundlePath ? { fileIcon: proc.bundlePath } : Icon.Terminal}
           title={proc.name}
-          subtitle={`PID ${proc.pid}`}
-          accessories={[{ text: formatMemoryMB(proc.memoryMB) }]}
+          accessories={[{ tag: `PID ${proc.pid}` }, { text: formatMemoryMB(proc.memoryMB) }]}
           actions={
             <ActionPanel>
               <Action
