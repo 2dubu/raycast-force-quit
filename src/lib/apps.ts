@@ -56,7 +56,5 @@ async function batchMemoryByPid(pids: number[]): Promise<Map<number, number>> {
 export async function fetchRunningApps(): Promise<RunningApp[]> {
   const raw = await listGuiApps();
   const memory = await batchMemoryByPid(raw.map((a) => a.pid));
-  return raw
-    .map((a) => ({ ...a, memoryMB: memory.get(a.pid) ?? 0 }))
-    .sort((a, b) => b.memoryMB - a.memoryMB);
+  return raw.map((a) => ({ ...a, memoryMB: memory.get(a.pid) ?? 0 })).sort((a, b) => b.memoryMB - a.memoryMB);
 }
