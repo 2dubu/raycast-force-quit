@@ -2,6 +2,19 @@
 
 Force quit running applications and processes from Raycast — like macOS' ⌥⌘⎋, but without leaving your keyboard.
 
+## Install (from source)
+
+Not on the Raycast Store — install it as a local extension:
+
+```sh
+git clone https://github.com/2dubu/raycast-force-quit.git
+cd raycast-force-quit
+npm install
+npm run dev   # ray develop — imports it into Raycast; stays installed after you stop the dev server
+```
+
+Requires [Raycast](https://raycast.com) and Node.js.
+
 ## Commands
 
 ### Force Quit
