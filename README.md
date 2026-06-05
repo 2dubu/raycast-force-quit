@@ -2,7 +2,7 @@
 
 Force quit running applications and processes from Raycast — like macOS' ⌥⌘⎋, but without leaving your keyboard.
 
-![Force Quit listing running applications with memory and CPU usage](metadata/force-quit-2.png)
+![Force Quit listing running applications with memory and CPU usage](metadata/force-quit-apps.png)
 
 ## Install (from source)
 
