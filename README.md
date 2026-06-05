@@ -6,14 +6,16 @@ Force quit running applications and processes from Raycast — like macOS' ⌥�
 
 ## Install (from source)
 
-Not on the Raycast Store — install it as a local extension:
+Not on the Raycast Store — install it as a local extension. You run the dev server **once**; it registers the extension into Raycast and it stays installed after you stop it.
 
 ```sh
 git clone https://github.com/2dubu/raycast-force-quit.git
 cd raycast-force-quit
 npm install
-npm run dev   # ray develop — imports it into Raycast; stays installed after you stop the dev server
+npm run dev   # ray develop
 ```
+
+Once the terminal prints `built extension successfully` and the **Force Quit** command shows up in Raycast, press `Ctrl+C` to stop the dev server. The extension stays installed and works without it — re-run `npm run dev` only when you want to rebuild after changing the code.
 
 Requires [Raycast](https://raycast.com) and Node.js.
 
