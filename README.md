@@ -2,7 +2,7 @@
 
 Force quit running applications and processes from Raycast — like macOS' ⌥⌘⎋, but without leaving your keyboard.
 
-![Force Quit listing running applications sorted by memory usage](metadata/force-quit-2.png)
+![Force Quit listing running applications with memory and CPU usage](metadata/force-quit-2.png)
 
 ## Install (from source)
 
@@ -22,7 +22,7 @@ Requires [Raycast](https://raycast.com) (signed in — running a local extension
 ## Commands
 
 ### Force Quit
-List running applications sorted by memory usage. Select an app and press Enter to force quit it after a confirmation prompt.
+Lists running applications with their memory and CPU usage. Sort by either with the dropdown, then select an app and press `↵` to force quit it after a confirmation prompt.
 
 ### Force Quit Process
 Same flow, but lists *every* process on the system (background daemons included). Useful when an app is unresponsive but doesn't appear in the standard list.
@@ -30,9 +30,10 @@ Same flow, but lists *every* process on the system (background daemons included)
 ## Behavior
 
 - Selecting an item shows a confirm dialog. Confirming sends `SIGKILL` immediately — equivalent to macOS' built-in Force Quit.
+- Force-quitting a process owned by root or another user surfaces a native administrator prompt and kills it with elevated privileges.
+- The list auto-refreshes on an interval (default 2s) — change the interval or disable it (`0`) via the **Auto-Refresh** preference. `⌘R` also refreshes manually.
 - A HUD message confirms success or failure.
-- `⌘R` refreshes the list manually. The list does not auto-poll.
 
 ## Permissions
 
-Force Quit only reads the public macOS process list (`lsappinfo`, `ps`) — no Automation permission, Accessibility permission, or full‑disk access is required.
+Force Quit only reads the public macOS process list (`lsappinfo`, `ps`) — no Automation permission, Accessibility permission, or full‑disk access is required. Force-quitting a privileged process additionally triggers the standard macOS administrator password prompt.
