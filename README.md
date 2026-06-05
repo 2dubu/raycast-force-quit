@@ -15,9 +15,9 @@ npm install
 npm run dev   # ray develop
 ```
 
-Once the terminal prints `built extension successfully` and the **Force Quit** command shows up in Raycast, press `Ctrl+C` to stop the dev server. The extension stays installed and works without it — re-run `npm run dev` only when you want to rebuild after changing the code.
+Once the terminal prints `built extension successfully` and the **Force Quit** command shows up in Raycast's root search, press `Ctrl+C` to stop the dev server. The extension stays installed and works without it — re-run `npm run dev` only when you want to rebuild after changing the code.
 
-Requires [Raycast](https://raycast.com) and Node.js.
+Requires [Raycast](https://raycast.com) (signed in — running a local extension needs a Raycast account) and Node.js 22.14+.
 
 ## Commands
 
