@@ -2,6 +2,8 @@
 
 Force quit running applications and processes from Raycast — like macOS' ⌥⌘⎋, but without leaving your keyboard.
 
+![Force Quit listing running applications sorted by memory usage](metadata/force-quit-2.png)
+
 ## Install (from source)
 
 Not on the Raycast Store — install it as a local extension:
